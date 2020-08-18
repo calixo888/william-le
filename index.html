@@ -93,22 +93,11 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="http://cdn.webxconsulting.com/files/spark/text.js"></script>
 
 			<script>
 				const projectAlias = "william-le-personal-website";
-				for (element of $("[data-spark]")) {
-					const alias = element.dataset.spark;
-					fetch(`http://cdn.webxconsulting.com/cms/text/?projectAlias=${projectAlias}&textAlias=${alias}`, {
-						method: 'GET',
-					  headers: {
-							"Access-Control-Allow-Origin": "*"
-					  }
-					}).then((response) => {
-						return response.json();
-					}).then((data) => {
-						$(`[data-spark~=${alias}]`)[0].innerHTML = data.text;
-					});
-				}
+				const spark = new Spark(projectAlias);
 
 				const blogsContainer = document.getElementById("blogs");
 				fetch(`http://cdn.webxconsulting.com/cms/blogs/?projectAlias=${projectAlias}`, {
